@@ -7,20 +7,29 @@ import javax.validation.constraints.NotNull;
 
 @Data
 @Entity
-@Table(name="users")
-public class User {
+@Table(name="appliances")
+public class Appliance {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotNull
     @NotBlank
-    private String email;
+    private String name;
 
     @NotNull
     @NotBlank
-    private String password;
+    private String type;
 
-    @OneToOne(mappedBy = "user")
-    private Profile profile;
+    @NotNull
+    @NotBlank
+    private String brand;
+
+    @NotNull
+    @NotBlank
+    private String model;
+
+    @ManyToOne
+    @JoinColumn(name="user_id", nullable=false)
+    private User user;
 }
