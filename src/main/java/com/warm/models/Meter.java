@@ -24,4 +24,12 @@ public class Meter {
     
     @NotNull
     private Float consumption;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "resource_id", referencedColumnName = "id")
+    private Resource resource;
+
+    @ManyToOne
+    @JoinColumn(name = "history_id", nullable = false)
+    private History history;
 }

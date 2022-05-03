@@ -20,4 +20,7 @@ public class Resource {
 
     @NotNull
     private ResourceType resourceType;
+
+    @OneToOne(mappedBy = "resource")
+    private Meter meter;
 }
