@@ -32,4 +32,8 @@ public class Meter {
     @ManyToOne
     @JoinColumn(name = "history_id", nullable = false)
     private History history;
+
+    @ManyToOne
+    @JoinColumn(name = "appliance_id", nullable = false)
+    private Appliance appliance;
 }
