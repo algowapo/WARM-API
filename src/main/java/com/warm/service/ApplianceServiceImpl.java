@@ -5,7 +5,8 @@ import com.warm.exception.ServiceException;
 import com.warm.models.Appliance;
 import com.warm.repository.ApplianceRepository;
 import com.warm.repository.UserRepository;
-import com.warm.resource.ApplianceRequest;
+import com.warm.resource.ApplianceResource;
+import com.warm.resource.SaveApplianceRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -39,7 +40,7 @@ public class ApplianceServiceImpl implements ApplianceService {
     }
 
     @Override
-    public Appliance update(Long id, ApplianceRequest applianceReq) {
+    public Appliance update(Long id, SaveApplianceRequest applianceReq) {
         return applianceRepository.findById(id).map(appliance -> {
             appliance.setName(applianceReq.getName());
             appliance.setBrand(applianceReq.getBrand());
@@ -58,14 +59,14 @@ public class ApplianceServiceImpl implements ApplianceService {
     }
 
     @Override
-    public Appliance create(ApplianceRequest request) {
+    public Appliance create(SaveApplianceRequest request) {
         Appliance appliance = fromReq(request);
         appliance.setUser(userService.findById(request.getUserId()));
         return applianceRepository.save(appliance);
     }
 
     //mapper
-    private Appliance fromReq(ApplianceRequest request) {
+    private Appliance fromReq(SaveApplianceRequest request) {
         Appliance appliance;
         if (request.getId() != null) {
             appliance = findById(request.getId());
@@ -78,5 +79,16 @@ public class ApplianceServiceImpl implements ApplianceService {
         appliance.setType(request.getType());
 
         return appliance;
+    }
+
+    public ApplianceResource convertToResource(Appliance appliance) {
+        ApplianceResource applianceResource = new ApplianceResource();
+
+        applianceResource.setBrand(appliance.getBrand());
+        applianceResource.setModel(appliance.getModel());
+        applianceResource.setName(appliance.getName());
+        applianceResource.setType(appliance.getType());
+
+        return applianceResource;
     }
 }

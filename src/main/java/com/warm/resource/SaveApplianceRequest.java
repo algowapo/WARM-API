@@ -6,7 +6,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 @Data
-public class ApplianceRequest {
+public class SaveApplianceRequest {
     @NotNull(message = "Name cannot be null")
     @NotBlank(message = "Name cannot be blank")
     String name;

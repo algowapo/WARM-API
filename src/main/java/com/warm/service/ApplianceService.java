@@ -1,15 +1,17 @@
 package com.warm.service;
 
 import com.warm.models.Appliance;
-import com.warm.resource.ApplianceRequest;
+import com.warm.resource.ApplianceResource;
+import com.warm.resource.SaveApplianceRequest;
 import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 
 public interface ApplianceService {
-    Appliance create(ApplianceRequest appliance);
+    Appliance create(SaveApplianceRequest appliance);
     Appliance findById(Long id);
     List<Appliance> findAllByUserId(Long userId);
-    Appliance update(Long id, ApplianceRequest appliance);
+    Appliance update(Long id, SaveApplianceRequest appliance);
     ResponseEntity<?> delete(Long id);
+    ApplianceResource convertToResource(Appliance appliance);
 }
