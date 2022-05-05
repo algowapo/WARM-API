@@ -7,6 +7,7 @@ import com.warm.repository.MeterRepository;
 import com.warm.resource.HistoryRequest;
 import com.warm.resource.MeterRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -23,12 +24,19 @@ public class MeterServiceImpl implements MeterService {
     @Autowired
     private ResourceService resourceService;
 
-    //@Autowired
-    //private HistoryService historyService;
+    @Autowired
+    @Lazy
+    private HistoryService historyService;
 
     @Override
     public Meter findById(Long id) {
         return meterRepository.findById(id).orElseThrow(() -> new ServiceException(Error.METER_NOT_FOUND));
+    }
+
+    @Override
+    public Meter update(Long id, MeterRequest request) {
+        Meter meter = fromReq(request);
+        return meterRepository.save(meter);
     }
 
     @Override
@@ -46,7 +54,7 @@ public class MeterServiceImpl implements MeterService {
         historyRequest.setUseCost(Float.parseFloat("0"));
         historyRequest.setMeterId(meter.getId());
 
-        //historyService.create(historyRequest);
+        historyService.create(historyRequest);
 
         return meter;
     }
@@ -56,12 +64,11 @@ public class MeterServiceImpl implements MeterService {
         if (request.getId() != null) {
             meter = findById(request.getId());
         } else {
-            meter = Meter.builder().build();
+            meter = Meter.builder().consumption(Float.parseFloat("0")).build();
         }
 
         meter.setName(request.getName());
         meter.setLocation(request.getLocation());
-        meter.setConsumption(request.getConsumption());
 
         return meter;
     }
