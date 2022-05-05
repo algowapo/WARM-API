@@ -1,5 +1,8 @@
 package com.warm.models;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -22,5 +25,6 @@ public class Resource {
     private ResourceType resourceType;
 
     @OneToOne(mappedBy = "resource")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Meter meter;
 }

@@ -5,6 +5,7 @@ import com.warm.exception.InvalidDataException;
 import com.warm.resource.MeterRequest;
 import com.warm.service.MeterService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
@@ -30,5 +31,10 @@ public class MeterController {
             throw new InvalidDataException(result, Error.INVALID_DATA);
         }
         meterService.update(id, request);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> update(@PathVariable(name = "id") Long id) {
+        return meterService.delete(id);
     }
 }

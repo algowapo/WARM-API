@@ -8,6 +8,7 @@ import com.warm.resource.HistoryRequest;
 import com.warm.resource.MeterRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -37,6 +38,13 @@ public class MeterServiceImpl implements MeterService {
     public Meter update(Long id, MeterRequest request) {
         Meter meter = fromReq(request);
         return meterRepository.save(meter);
+    }
+
+    @Override
+    public ResponseEntity<?> delete(Long id) {
+        Meter meter = findById(id);
+        meterRepository.delete(meter);
+        return ResponseEntity.ok().build();
     }
 
     @Override
