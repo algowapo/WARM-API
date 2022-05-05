@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.validation.Valid;
 
 @RestController
-@RequestMapping("appliance")
+@RequestMapping("appliances")
 public class ApplianceController {
     @Autowired
     ApplianceService applianceService;
