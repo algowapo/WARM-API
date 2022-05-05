@@ -17,7 +17,6 @@ public class MeterRequest {
     private String location;
 
     @NotNull(message = "Consumption cannot be null")
-    @NotBlank(message = "Consumption cannot be blank")
     private Float consumption;
 
     @NotNull(message = "Resource cannot be null")
