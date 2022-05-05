@@ -23,8 +23,8 @@ public class MeterServiceImpl implements MeterService {
     @Autowired
     private ResourceService resourceService;
 
-    @Autowired
-    private HistoryService historyService;
+    //@Autowired
+    //private HistoryService historyService;
 
     @Override
     public Meter findById(Long id) {
@@ -46,7 +46,7 @@ public class MeterServiceImpl implements MeterService {
         historyRequest.setUseCost(Float.parseFloat("0"));
         historyRequest.setMeterId(meter.getId());
 
-        historyService.create(historyRequest);
+        //historyService.create(historyRequest);
 
         return meter;
     }
