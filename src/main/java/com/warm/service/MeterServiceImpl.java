@@ -34,6 +34,12 @@ public class MeterServiceImpl implements MeterService {
     }
 
     @Override
+    public Meter update(Long id, MeterRequest request) {
+        Meter meter = fromReq(request);
+        return meterRepository.save(meter);
+    }
+
+    @Override
     public Meter create(MeterRequest request) {
         Meter meter = fromReq(request);
         meter.setAppliance(applianceService.findById(request.getApplianceId()));
@@ -58,12 +64,11 @@ public class MeterServiceImpl implements MeterService {
         if (request.getId() != null) {
             meter = findById(request.getId());
         } else {
-            meter = Meter.builder().build();
+            meter = Meter.builder().consumption(Float.parseFloat("0")).build();
         }
 
         meter.setName(request.getName());
         meter.setLocation(request.getLocation());
-        meter.setConsumption(request.getConsumption());
 
         return meter;
     }

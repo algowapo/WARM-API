@@ -6,4 +6,5 @@ import com.warm.resource.MeterRequest;
 public interface MeterService {
     Meter create(MeterRequest request);
     Meter findById(Long id);
+    Meter update(Long id, MeterRequest request);
 }
