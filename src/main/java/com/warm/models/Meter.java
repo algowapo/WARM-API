@@ -1,13 +1,18 @@
 package com.warm.models;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
-
+import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 @Entity
 @Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "meters")
 public class Meter {
     @Id
@@ -28,10 +33,6 @@ public class Meter {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "resource_id", referencedColumnName = "id")
     private Resource resource;
-
-    @ManyToOne
-    @JoinColumn(name = "history_id", nullable = false)
-    private History history;
 
     @ManyToOne
     @JoinColumn(name = "appliance_id", nullable = false)
