@@ -4,9 +4,12 @@ import com.warm.exception.Error;
 import com.warm.exception.ServiceException;
 import com.warm.models.History;
 import com.warm.repository.HistoryRepository;
+import com.warm.resource.HistoryDto;
+import com.warm.resource.HistoryQuery;
 import com.warm.resource.HistoryRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import java.util.List;
 
 @Service
 public class HistoryServiceImpl implements HistoryService {
@@ -28,6 +31,19 @@ public class HistoryServiceImpl implements HistoryService {
         history.setMeter(meterService.findById(request.getMeterId()));
 
         return historyRepository.save(history);
+    }
+
+    @Override
+    public List<HistoryDto> historyQuery(HistoryQuery query) {
+
+        return historyRepository.queryHistory(
+                query.getStartDate(),
+                query.getFinishDate(),
+                query.getResourceType(),
+                query.getUserId()
+        );
+
+
     }
 
     private History fromReq(HistoryRequest request) {
