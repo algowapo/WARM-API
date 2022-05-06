@@ -9,6 +9,7 @@ public enum Error {
     RESOURCE_NOT_FOUND(1005, "Resource not found :("),
     HISTORY_NOT_FOUND(1006, "History not found :("),
     EMPTY_HISTORY_QUERY(1007, "Not found Histories for query :("),
+    EMPTY_METER_QUERY(1008, "Not found Meters for query :("),
     ;
 
 

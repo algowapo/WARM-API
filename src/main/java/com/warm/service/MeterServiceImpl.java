@@ -5,6 +5,8 @@ import com.warm.exception.ServiceException;
 import com.warm.models.Meter;
 import com.warm.repository.MeterRepository;
 import com.warm.resource.HistoryRequest;
+import com.warm.resource.MeterDto;
+import com.warm.resource.MeterQuery;
 import com.warm.resource.MeterRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
@@ -12,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.List;
 
 @Service
 public class MeterServiceImpl implements MeterService {
@@ -45,6 +48,21 @@ public class MeterServiceImpl implements MeterService {
         Meter meter = findById(id);
         meterRepository.delete(meter);
         return ResponseEntity.ok().build();
+    }
+
+    @Override
+    public List<MeterDto> meterQuery(MeterQuery query) {
+        List<MeterDto> meters = meterRepository.queryMeter(
+                query.getId(),
+                query.getUserId(),
+                query.getResourceType()
+        );
+
+        if (meters.isEmpty()) {
+            throw  new ServiceException(Error.EMPTY_METER_QUERY);
+        }
+
+        return meters;
     }
 
     @Override
