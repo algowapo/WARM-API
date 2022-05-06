@@ -2,7 +2,6 @@ package com.warm.controller;
 
 import com.warm.exception.Error;
 import com.warm.exception.InvalidDataException;
-import com.warm.resource.ApplianceRequest;
 import com.warm.resource.ResourceRequest;
 import com.warm.service.ResourceService;
 import org.springframework.beans.factory.annotation.Autowired;
