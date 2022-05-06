@@ -1,5 +1,6 @@
 package com.warm.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
@@ -28,5 +29,6 @@ public class Resource {
 
     @OneToOne(mappedBy = "resource")
     @OnDelete(action = OnDeleteAction.CASCADE)
+    @JsonIgnore
     private Meter meter;
 }
