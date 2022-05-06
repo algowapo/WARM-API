@@ -7,7 +7,8 @@ public enum Error {
     APPLIANCE_NOT_FOUND(1003, "Appliance not found :("),
     METER_NOT_FOUND(1004, "Meter not found :("),
     RESOURCE_NOT_FOUND(1005, "Resource not found :("),
-    HISTORY_NOT_FOUND(1005, "History not found :("),
+    HISTORY_NOT_FOUND(1006, "History not found :("),
+    EMPTY_HISTORY_QUERY(1007, "Not found Histories for query :("),
     ;
 
 

@@ -4,6 +4,7 @@ import com.warm.exception.Error;
 import com.warm.exception.ServiceException;
 import com.warm.models.History;
 import com.warm.repository.HistoryRepository;
+import com.warm.resource.ConsumeDto;
 import com.warm.resource.HistoryDto;
 import com.warm.resource.HistoryQuery;
 import com.warm.resource.HistoryRequest;
@@ -36,14 +37,36 @@ public class HistoryServiceImpl implements HistoryService {
     @Override
     public List<HistoryDto> historyQuery(HistoryQuery query) {
 
-        return historyRepository.queryHistory(
+        List<HistoryDto> history = historyRepository.queryHistory(
                 query.getStartDate(),
                 query.getFinishDate(),
                 query.getResourceType(),
                 query.getUserId()
         );
 
+        if (history.isEmpty()) {
+            throw new ServiceException(Error.EMPTY_HISTORY_QUERY);
+        }
 
+        return history;
+    }
+
+    @Override
+    public ConsumeDto consumeByHistoryQuery(HistoryQuery query) {
+        List<HistoryDto> history = historyQuery(query);
+
+        Float totalConsume = Float.parseFloat("0");
+        Float totalTime = Float.parseFloat("0");
+        for (HistoryDto h : history) {
+            totalConsume += h.getUseCost();
+            totalTime += h.getUseTime();
+        }
+
+        ConsumeDto consume = new ConsumeDto();
+        consume.setTotalConsume(totalConsume);
+        consume.setTotalTime(totalTime);
+
+        return consume;
     }
 
     private History fromReq(HistoryRequest request) {

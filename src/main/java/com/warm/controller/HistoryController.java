@@ -1,5 +1,6 @@
 package com.warm.controller;
 
+import com.warm.resource.ConsumeDto;
 import com.warm.resource.HistoryDto;
 import com.warm.resource.HistoryQuery;
 import com.warm.service.HistoryService;
@@ -20,5 +21,10 @@ public class HistoryController {
     @GetMapping
     public List<HistoryDto> findHistoryDtoByQuery(HistoryQuery query) {
         return historyService.historyQuery(query);
+    }
+
+    @GetMapping("/consume")
+    public ConsumeDto consumeByHistoryQuery(HistoryQuery query) {
+        return historyService.consumeByHistoryQuery(query);
     }
 }
