@@ -41,7 +41,8 @@ public class HistoryServiceImpl implements HistoryService {
                 query.getStartDate(),
                 query.getFinishDate(),
                 query.getResourceType(),
-                query.getUserId()
+                query.getUserId(),
+                query.getMeterId()
         );
 
         if (history.isEmpty()) {

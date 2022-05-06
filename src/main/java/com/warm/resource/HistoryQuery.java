@@ -19,6 +19,8 @@ import java.util.Date;
 public class HistoryQuery {
     private Long userId;
 
+    private Long meterId;
+
     @DateTimeFormat(iso = ISO.DATE)
     private Date startDate;
 
