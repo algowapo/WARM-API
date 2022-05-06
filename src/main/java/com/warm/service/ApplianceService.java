@@ -9,9 +9,9 @@ import java.util.List;
 
 public interface ApplianceService {
     Appliance create(SaveApplianceRequest appliance);
+    Appliance findByIdAndUserId(Long id, Long userId);
     Appliance findById(Long id);
     List<Appliance> findAllByUserId(Long userId);
     Appliance update(Long id, SaveApplianceRequest appliance);
-    ResponseEntity<?> delete(Long id);
-    ApplianceResource convertToResource(Appliance appliance);
+    ResponseEntity<?> delete(Long id, Long userId);
 }

@@ -8,4 +8,5 @@ import java.util.List;
 
 public interface ApplianceRepository extends JpaRepository<Appliance, Long> {
     List<Appliance> findAllByUserId(Long userId);
+    Appliance findByIdAndUserId(Long id, Long userId);
 }
