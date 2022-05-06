@@ -17,13 +17,15 @@ public interface HistoryRepository extends JpaRepository<History, Long> {
             " WHERE (h.date >= :startDate OR :startDate IS NULL ) " +
             " AND (h.date <= :finishDate OR :finishDate IS NULL ) " +
             " AND (h.meter.resource.resourceType = :resourceType OR :resourceType IS NULL ) " +
-            " AND (h.meter.appliance.user.id = :userId OR :userId IS NULL)" +
+            " AND (h.meter.appliance.user.id = :userId OR :userId IS NULL) " +
+            " AND (h.meter.id = :meterId OR :meterId IS NULL) " +
             "")
     List<HistoryDto> queryHistory(
             @Param("startDate") Date startDate,
             @Param("finishDate") Date finishDate,
             @Param("resourceType") ResourceType resourceType,
-            @Param("userId") Long userId
+            @Param("userId") Long userId,
+            @Param("meterId") Long meterId
     );
 
 }
