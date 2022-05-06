@@ -1,5 +1,6 @@
 package com.warm.models;
 
+import lombok.Data;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
@@ -7,6 +8,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
+@Data
 @Entity
 @Table(name = "resources")
 public class Resource {
